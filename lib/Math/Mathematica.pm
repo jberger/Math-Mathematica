@@ -4,6 +4,16 @@ package Math::Mathematica;
 
 Math::Mathematica - A Simple PTY connection to Wolfram's Mathematica
 
+=head1 SYNOPSIS
+
+ use Math::Mathematica;
+ my $math = Math::Mathematica->new;
+ my $result = $math->evaluate('Integrate[Sin[x],{x,0,Pi}]'); # 2
+
+=head1 DESCRIPTION
+
+Although there are more clever mechanisms to interact with Wolfram's Mathematica (namely MathLink) they are very hard to write. L<Math::Mathematica> simply starts a PTY, runs the command line C<math> program, and manages input/output via string transport. While a MathLink client for Perl would be ideal, this module gets the job done.
+
 =cut
 
 use strict;
