@@ -28,6 +28,10 @@ use IO::Pty::Easy;
 my $re_new_prompt = qr/In\[\d+\]:= /;
 my $re_result = qr/Out\[\d+\]= (.*?)$re_new_prompt/ms;
 
+=head1 METHODS
+
+=cut
+
 sub new {
   my $class = shift;
   my %opts = ref $_[0] ? %{ shift() } : @_;
