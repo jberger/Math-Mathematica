@@ -36,12 +36,27 @@ sub new {
 
   $self->pty->spawn($self->{command}) 
     or croak "Could not connect to Mathematica";
-  $self->wait_for_prompt;
+  $self->_wait_for_prompt;
 
   return $self;
 }
 
-sub wait_for_prompt {
+sub evaluate {
+  my ($self, $command) = @_;
+  my $pty = $self->pty;
+  $command .= "\n";
+
+  $self->log($command);
+  $pty->write($command, 0) or croak "No data sent";
+
+  my $output = $self->_wait_for_prompt;
+  my $return = $1 if $output =~ $re_result;
+  $return =~ s/[\n\s]*$//;
+  
+  return $return;
+}
+
+sub _wait_for_prompt {
   my $self = shift;
   my $pty = $self->pty;
 
@@ -61,21 +76,6 @@ sub wait_for_prompt {
 
   $self->log($output);
   return $output;
-}
-
-sub evaluate {
-  my ($self, $command) = @_;
-  my $pty = $self->pty;
-  $command .= "\n";
-
-  $self->log($command);
-  $pty->write($command, 0) or croak "No data sent";
-
-  my $output = $self->wait_for_prompt;
-  my $return = $1 if $output =~ $re_result;
-  $return =~ s/[\n\s]*$//;
-  
-  return $return;
 }
 
 sub DESTROY { shift->pty->close }
