@@ -54,6 +54,10 @@ warn_after - Number of seconds to wait before warning when waiting for a respons
 
 pty - An L<IO::Pty::Easy> object (or one which satisfies its api). If this is not specified, one will be created.
 
+=item *
+
+debug - If set to true (or if C<PERL_MATHEMATICA_DEBUG> environment variable is true) then some debug statements are printed to C<STDERR>.
+
 =back
 
 =cut
