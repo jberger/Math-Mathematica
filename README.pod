@@ -38,6 +38,10 @@ warn_after - Number of seconds to wait before warning when waiting for a respons
 
 pty - An L<IO::Pty::Easy> object (or one which satisfies its api). If this is not specified, one will be created.
 
+=item *
+
+debug - If set to true (or if C<PERL_MATHEMATICA_DEBUG> environment variable is true) then some debug statements are printed to C<STDERR>.
+
 =back
 
 =head2 evaluate
@@ -51,6 +55,16 @@ If the C<log> constructor option was set, this accessor will contain the full I/
 =head2 pty
 
 Accessor method which returns the active L<IO::Pty::Easy> object. This object will be closed when the L<Math::Mathematica> object is destroyed.
+
+=head1 SEE ALSO
+
+=over
+
+=item L<IO::Pty::Easy>
+
+=item L<IO::Pty>
+
+=back
 
 =head1 SOURCE REPOSITORY
 
