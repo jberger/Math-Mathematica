@@ -21,6 +21,7 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
+            "File::Which" : "0",
             "Module::Build" : "0.38"
          }
       },

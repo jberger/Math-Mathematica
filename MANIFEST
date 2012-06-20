@@ -3,6 +3,6 @@ lib/Math/Mathematica.pm
 MANIFEST			This list of files
 META.json
 META.yml
-README
+README.pod
 t/basic.t
 t/errors.t
