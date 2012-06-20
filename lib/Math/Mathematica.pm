@@ -95,6 +95,8 @@ sub evaluate {
   $pty->write($command, 0) or croak "No data sent";
 
   my $output = $self->_wait_for_prompt;
+  $self->log($output);
+
   my $return = $1 if $output =~ $re_result;
   $return =~ s/[\n\s]*$//;
   
@@ -123,7 +125,6 @@ sub _wait_for_prompt {
     last if $output =~ $re_new_prompt; 
   }
 
-  $self->log($output);
   return $output;
 }
 
