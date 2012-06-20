@@ -75,7 +75,8 @@ sub new {
 
   $self->pty->spawn($self->{command}) 
     or croak "Could not connect to Mathematica";
-  $self->_wait_for_prompt;
+  my $output = $self->_wait_for_prompt;
+  $self->log($output);
 
   return $self;
 }
