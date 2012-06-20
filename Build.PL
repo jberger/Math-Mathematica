@@ -5,7 +5,7 @@ use Module::Build;
 use File::Which 'which';
 
 unless (defined which 'math') {
-  my $message = "Math::Mathematica requires an installed version of Mathematica and the 'math' shell";
+  my $message = "Math::Mathematica requires an installed version of Mathematica and the 'math' shell\n";
   if ($ENV{AUTOMATED_TESTING}) {
     print $message;
     exit 0;
