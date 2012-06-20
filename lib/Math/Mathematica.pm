@@ -170,6 +170,16 @@ sub DESTROY { shift->pty->close }
 
 1;
 
+=head1 SEE ALSO
+
+=over
+
+=item L<IO::Pty::Easy>
+
+=item L<IO::Pty>
+
+=back
+
 =head1 SOURCE REPOSITORY
 
 L<http://github.com/jberger/Math-Mathematica>
