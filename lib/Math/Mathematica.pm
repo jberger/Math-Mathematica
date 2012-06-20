@@ -27,8 +27,8 @@ $VERSION = eval $VERSION;
 use Carp;
 use IO::Pty::Easy;
 
-my $re_new_prompt = qr/In\[\d+\]:= /;
-my $re_result = qr/Out\[\d+\]= (.*?)$re_new_prompt/ms;
+my $re_new_prompt = qr/In\[\d+\]:=\s*/;
+my $re_result = qr/Out\[\d+\]=\s*(.*?)$re_new_prompt/ms;
 
 =head1 METHODS
 
@@ -69,6 +69,7 @@ sub new {
     warn_after => $opts{warn_after} || 10,
     command    => $opts{command}    || 'math',
     log        => $opts{log} ? '' : undef,
+    debug      => $opts{debug} || $ENV{PERL_MATHEMATICA_DEBUG} || 0,
   };
 
   bless $self, $class;
@@ -116,16 +117,26 @@ sub _wait_for_prompt {
   my $output = '';
   while ($pty->is_active) {
     my $read = $pty->read(1);
+
     if (defined $read) {
       $output .= $read;
       $null_loops = 0;
+
+      print STDERR "Got: ===>$read<===\n" if $self->{debug};
+
+      last if $output =~ $re_new_prompt;
+
+      print STDERR "Status: Did not match prompt\n\n" if $self->{debug};
+
     } else {
+
       carp "Response from Mathematica is taking longer than expected" 
         if ++$null_loops >= $self->{warn_after};
+
     }
-    last if $output =~ $re_new_prompt; 
   }
 
+  print STDERR "Status: Matched prompt\n\n" if $self->{debug};
   return $output;
 }
 
