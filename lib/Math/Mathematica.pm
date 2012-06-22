@@ -21,7 +21,7 @@ This module does not contain a Mathematica interpreter. Mathematica must be inst
 use strict;
 use warnings;
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 $VERSION = eval $VERSION;
 
 use Carp;

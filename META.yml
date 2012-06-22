@@ -19,11 +19,11 @@ no_index:
 provides:
   Math::Mathematica:
     file: lib/Math/Mathematica.pm
-    version: 0.001
+    version: 0.002
 requires:
   IO::Pty::Easy: 0
 resources:
   bugtracker: http://github.com/jberger/Math-Mathematica/issues
   license: http://dev.perl.org/licenses/
   repository: http://github.com/jberger/Math-Mathematica
-version: 0.001
+version: 0.002
